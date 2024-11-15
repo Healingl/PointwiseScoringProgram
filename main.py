@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Time : 2024/11/15 22:02
+# @Author : Yuzhou Zhuang
+# @Email : 605540375@qq.com
+
+
 import sys
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QLabel, QFileDialog, QGraphicsView,
