@@ -1,28 +1,24 @@
-# -*- coding: utf-8 -*-
-# @Time : 2024/11/15 21:24
-# @Author : Yuzhou Zhuang
-# @Email : 605540375@qq.com
-
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDesktopWidget
 
 
 class Window1(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("窗口 1")
-        self.setGeometry(100, 100, 1024, 720)
+        self.resize(1024, 720)
+        self.center()  # 居中显示
 
-        # 按钮
-        button = QPushButton("跳转到窗口 2", self)
+        # 按钮 "进入"
+        button = QPushButton("进入", self)
+        button.setGeometry(1024 - 100, 20, 80, 40)  # 右上角位置
         button.clicked.connect(self.open_window2)
 
-        # 布局
-        layout = QVBoxLayout()
-        layout.addWidget(button)
-        container = QWidget()
-        container.setLayout(layout)
-        self.setCentralWidget(container)
+    def center(self):
+        screen = QDesktopWidget().availableGeometry()
+        frame = self.frameGeometry()
+        frame.moveCenter(screen.center())
+        self.move(frame.topLeft())
 
     def open_window2(self):
         self.window2 = Window2()
@@ -34,21 +30,24 @@ class Window2(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("窗口 2")
-        self.setGeometry(100, 100, 1024, 720)
+        self.resize(1024, 720)
+        self.center()  # 居中显示
 
-        # 按钮
-        button1 = QPushButton("跳转到窗口 1", self)
+        # 按钮 "进入" 放在左上角
+        button1 = QPushButton("上一个界面", self)
+        button1.setGeometry(20, 20, 80, 40)  # 左上角位置
         button1.clicked.connect(self.open_window1)
-        button2 = QPushButton("跳转到窗口 3", self)
-        button2.clicked.connect(self.open_window3)
 
-        # 布局
-        layout = QVBoxLayout()
-        layout.addWidget(button1)
-        layout.addWidget(button2)
-        container = QWidget()
-        container.setLayout(layout)
-        self.setCentralWidget(container)
+        # 按钮 "退出" 放在右上角
+        button2 = QPushButton("下一个界面", self)
+        button2.setGeometry(1024 - 100, 20, 80, 40)  # 右上角位置
+        button2.clicked.connect(self.open_window12)
+
+    def center(self):
+        screen = QDesktopWidget().availableGeometry()
+        frame = self.frameGeometry()
+        frame.moveCenter(screen.center())
+        self.move(frame.topLeft())
 
     def open_window1(self):
         self.window1 = Window1()
@@ -65,18 +64,19 @@ class Window3(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("窗口 3")
-        self.setGeometry(100, 100, 1024, 720)
+        self.resize(1024, 720)
+        self.center()  # 居中显示
 
-        # 按钮
-        button = QPushButton("跳转到窗口 2", self)
+        # 按钮 "退出" 放在左上角
+        button = QPushButton("退出", self)
+        button.setGeometry(20, 20, 80, 40)  # 左上角位置
         button.clicked.connect(self.open_window2)
 
-        # 布局
-        layout = QVBoxLayout()
-        layout.addWidget(button)
-        container = QWidget()
-        container.setLayout(layout)
-        self.setCentralWidget(container)
+    def center(self):
+        screen = QDesktopWidget().availableGeometry()
+        frame = self.frameGeometry()
+        frame.moveCenter(screen.center())
+        self.move(frame.topLeft())
 
     def open_window2(self):
         self.window2 = Window2()
@@ -89,4 +89,3 @@ if __name__ == "__main__":
     main_window = Window1()
     main_window.show()
     sys.exit(app.exec_())
-
