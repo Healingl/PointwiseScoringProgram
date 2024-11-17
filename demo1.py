@@ -7,7 +7,7 @@
 import sys
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton,  QLabel, QFileDialog, QGraphicsView,
-    QGraphicsScene, QGraphicsPixmapItem, QVBoxLayout, QWidget, QLineEdit, QHBoxLayout
+    QGraphicsScene, QGraphicsPixmapItem, QVBoxLayout, QWidget, QLineEdit
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
@@ -24,31 +24,21 @@ class Window1(QMainWindow):
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
-        main_layout = QVBoxLayout(central_widget)
-
-        # 用于放置文件选择相关组件的水平布局
-        file_choose_layout = QHBoxLayout()
-
-        # 左右边距，可根据实际情况调整
-        margin_size = 20
+        layout = QVBoxLayout(central_widget)
 
         # 用于显示文件路径的文本框
         self.file_path_edit = QLineEdit(self)
-        file_choose_layout.addWidget(self.file_path_edit)
+        layout.addWidget(self.file_path_edit)
 
         # 按钮 "YAML配置文件选择"
-        select_button = QPushButton("YAML配置文件选择", self)
-        select_button.clicked.connect(self.choose_yaml_file)
-        file_choose_layout.addWidget(select_button)
+        choose_button = QPushButton("YAML配置文件选择", self)
+        choose_button.clicked.connect(self.choose_yaml_file)
+        layout.addWidget(choose_button)
 
-        # 设置水平布局的左右边距
-        file_choose_layout.setContentsMargins(margin_size, 0, margin_size, 0)
-        main_layout.addLayout(file_choose_layout)
-
-        # 按钮 "下一界面"，放置在右上角
-        next_button = QPushButton("下一界面", self)
-        next_button.setGeometry(1024 - 100, 20, 80, 40)  # 右上角位置
-        next_button.clicked.connect(self.open_window2)
+        # 按钮 "进入"
+        button = QPushButton("下一界面", self)
+        button.clicked.connect(self.open_window2)
+        layout.addWidget(button)
 
     def center(self):
         screen = QApplication.primaryScreen().availableGeometry()
@@ -63,15 +53,15 @@ class Window1(QMainWindow):
             self.file_path_edit.setText(file_path)
 
     def open_window2(self):
-        # # 这里可以添加逻辑，比如根据获取到的文件路径读取config.yaml文件内容并传递给下一个窗口
-        # file_path = self.file_path_edit.text()
-        # if file_path:
-        #     try:
-        #         with open(file_path, 'r') as file:
-        #             data = yaml.safe_load(file)
-        #             print(data)  # 这里简单打印读取到的数据，可根据需求处理
-        #     except FileNotFoundError:
-        #         print(f"文件 {file_path} 不存在")
+        # 这里可以添加逻辑，比如根据获取到的文件路径读取config.yaml文件内容并传递给下一个窗口
+        file_path = self.file_path_edit.text()
+        if file_path:
+            try:
+                with open(file_path, 'r') as file:
+                    data = yaml.safe_load(file)
+                    print(data)  # 这里简单打印读取到的数据，可根据需求处理
+            except FileNotFoundError:
+                print(f"文件 {file_path} 不存在")
 
         self.window2 = Window2()
         self.window2.show()

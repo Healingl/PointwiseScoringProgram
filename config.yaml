@@ -1,0 +1,7 @@
+dataset_json_path: ''
+dataset_image_dir: ''
+multiple_choice_questions:
+  - question: "问题1:是不是在50字以内？"
+    answers: ["是（10分） ","否（0分，结束）"]
+  - question: "问题2:是否包含与用户兴趣相关的内容？"
+    answers: ["不包含（0分） ","部分包含（10分，结束）","包含（20分，结束）"]
