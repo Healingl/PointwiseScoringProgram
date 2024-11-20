@@ -3,15 +3,6 @@
 # @Author : Yuzhou Zhuang
 # @Email : 605540375@qq.com
 
-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2024/11/19 20:53
-# @Author  : Yuzhou Zhuang
-# @File    : demo2.py
-# @License: (C) Copyright 2024-2034, OPLUS Mobile Comm Corp., Ltd.
-# @Desc:
-
 import os
 import sys
 from PyQt5.QtWidgets import (
@@ -20,7 +11,7 @@ from PyQt5.QtWidgets import (
     QGraphicsView, QRadioButton, QMessageBox, QSplitter, QTextBrowser, QPlainTextEdit
 )
 from PyQt5.QtCore import QTimer, QDateTime, QSize, Qt, QRectF, pyqtSignal
-from PyQt5.QtGui import QPainter, QPixmap, QWheelEvent
+from PyQt5.QtGui import QPainter, QPixmap, QWheelEvent, QIcon
 from datetime import datetime
 import pandas as pd
 import numpy as np
@@ -37,6 +28,7 @@ class Window1(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Step1 配置文件选择")
+        # self.setWindowIcon(QIcon('logo.ico'))
         self.resize(WINDOW_SIZE[0], WINDOW_SIZE[1])
         self.center()
 
@@ -95,7 +87,7 @@ class Window1(QMainWindow):
         self.parse_button.setEnabled(False)
         self.parse_button.setStyleSheet("font-size: 17px;font-weight: bold")
         self.parse_button.clicked.connect(self.open_window2)
-        self.parse_button.setMinimumSize(int(self.__window_width * 0.9),int(self.__window_height * 0.04))  # 设置按钮的宽度
+        self.parse_button.setMinimumSize(int(self.__window_width*0.9), int(self.__window_height * 0.04))  # 设置按钮的宽度
         parse_button_layout.addWidget(self.parse_button)  # 居中对齐
         parse_button_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 
@@ -176,6 +168,7 @@ class Window2(QMainWindow):
     def __init__(self, yaml_path, yaml_dict, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setWindowTitle("Step2 逐项标注数据")
+        # self.setWindowIcon(QIcon('logo.ico'))
         self.resize(WINDOW_SIZE[0], WINDOW_SIZE[1])
         self.center()
 
@@ -552,7 +545,8 @@ class Window3(QMainWindow):
         self.total_score = 0
 
         self.resize(WINDOW_SIZE[0], WINDOW_SIZE[1])
-        self.setWindowTitle("数据打分窗口")
+        self.setWindowTitle("Step3 数据打分窗口")
+        # self.setWindowIcon(QIcon('logo.ico'))
 
         self.__window_width = self.width()
         self.__button_width = self.__window_width // 2
